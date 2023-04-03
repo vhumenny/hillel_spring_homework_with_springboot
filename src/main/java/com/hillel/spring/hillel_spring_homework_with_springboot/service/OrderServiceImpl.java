@@ -24,7 +24,6 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Order saveOrder(Order order) {
-
         order.setDate(LocalDateTime.now());
         order.setCost(getOrderCost(order.getProducts()));
 
@@ -41,7 +40,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Order getOrder(int id) {
+    public Order getOrder(Integer id) {
         Optional<Order> optional = orderRepository.findById(id);
         if (optional.isEmpty()) {
             throw new NoSuchOrderException("There is no order with ID = " + id + " in Database.");
@@ -49,5 +48,8 @@ public class OrderServiceImpl implements OrderService {
         return optional.get();
     }
 
-
+    @Override
+    public void deleteOrder(Integer id) {
+        orderRepository.deleteById(id);
+    }
 }

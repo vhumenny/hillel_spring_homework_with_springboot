@@ -9,5 +9,7 @@ public interface OrderService {
 
     public Order saveOrder(Order order);
 
-    public Order getOrder(int id);
+    public Order getOrder(Integer id);
+
+    public void deleteOrder(Integer id);
 }
