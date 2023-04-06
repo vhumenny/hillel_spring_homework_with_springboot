@@ -26,7 +26,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Product getProduct(Integer id) {
+    public Product findProductById(Integer id) {
         Optional<Product> optional = productRepository.findById(id);
         if (optional.isEmpty()) {
             throw new NoSuchProductException("There is no product with ID = " + id + " in Database.");

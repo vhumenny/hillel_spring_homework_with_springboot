@@ -10,7 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/products")
-public class OrderController {
+public class ProductController {
     @Autowired
     private ProductService productService;
 
@@ -20,7 +20,18 @@ public class OrderController {
     }
 
     @GetMapping("/{id}")
-    public Product showOrderById(@PathVariable int id) {
-        return productService.getProduct(id);
+    public Product showOrderById(@PathVariable Integer id) {
+        return productService.findProductById(id);
+    }
+
+    @DeleteMapping("/{id}")
+    public String deleteProduct(@PathVariable Integer id) {
+        productService.deleteProduct(id);
+        return "Product with id = " + id + " was deleted from DB";
+    }
+
+    @PostMapping
+    public Product addNewProduct(@RequestBody Product product) {
+        return productService.saveProduct(product);
     }
 }

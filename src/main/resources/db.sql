@@ -3,9 +3,7 @@ CREATE TABLE products
     id    int NOT NULL AUTO_INCREMENT,
     name  varchar(255),
     cost NUMERIC,
-    order_id int,
-    PRIMARY KEY (id),
-    FOREIGN KEY (order_id) REFERENCES orders (id)
+    PRIMARY KEY (id)
 );
 
 CREATE TABLE orders
