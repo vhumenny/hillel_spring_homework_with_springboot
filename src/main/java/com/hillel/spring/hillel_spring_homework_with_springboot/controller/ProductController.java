@@ -3,6 +3,7 @@ package com.hillel.spring.hillel_spring_homework_with_springboot.controller;
 
 import com.hillel.spring.hillel_spring_homework_with_springboot.model.Product;
 import com.hillel.spring.hillel_spring_homework_with_springboot.service.ProductService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,8 +11,8 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/products")
+@AllArgsConstructor
 public class ProductController {
-    @Autowired
     private ProductService productService;
 
     @GetMapping
