@@ -3,16 +3,17 @@ package com.hillel.spring.hillel_spring_homework_with_springboot.service;
 import com.hillel.spring.hillel_spring_homework_with_springboot.exception.NoSuchProductException;
 import com.hillel.spring.hillel_spring_homework_with_springboot.model.Product;
 import com.hillel.spring.hillel_spring_homework_with_springboot.repository.ProductRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@AllArgsConstructor
 public class ProductServiceImpl implements ProductService {
-    @Autowired
-    private ProductRepository productRepository;
+
+    private final ProductRepository productRepository;
 
     @Override
     public List<Product> findAllProducts() {
