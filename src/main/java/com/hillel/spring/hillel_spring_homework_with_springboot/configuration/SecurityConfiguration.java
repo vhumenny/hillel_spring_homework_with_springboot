@@ -4,12 +4,13 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
+@EnableWebSecurity
 public class SecurityConfiguration {
 
     @Bean
@@ -19,18 +20,14 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests()
                 .requestMatchers(HttpMethod.GET, "/products").hasAnyRole("ADMIN", "USER")
                 .requestMatchers(HttpMethod.GET, "/products/*").hasAnyRole("ADMIN", "USER")
-                .requestMatchers(HttpMethod.DELETE, "/products/*").hasRole("ADMIN")
-                .requestMatchers(HttpMethod.POST, "/products").hasRole("ADMIN")
-                .anyRequest().permitAll()
-                .and().build();
+                .requestMatchers(HttpMethod.DELETE, "/**").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.POST, "/**").hasRole("ADMIN")
+                .requestMatchers("/ping").permitAll()
+                .and().csrf().disable()
+                .build();
     }
 
-//    @Bean
-//    protected UserDetailsService userDetailsService() {
-//        return new JdbcUserDetailsManager(dataSource);
-//    }
-
-
+    @SuppressWarnings("deprecation")
     @Bean
     public PasswordEncoder passwordEncoder() {
         return NoOpPasswordEncoder.getInstance();
